@@ -6,7 +6,7 @@ class Fahrkartenautomat {
 		Scanner tastatur = new Scanner(System.in);
 
 		int ticketpreis = 100;
-		
+
 		int zuZahlenderBetrag = 0;
 		int eingezahlterGesamtbetrag = 0;
 		int eingeworfeneMuenze = 0;
@@ -16,8 +16,16 @@ class Fahrkartenautomat {
 		// Ticket auswahl
 		System.out.print("Ticketpreis (Euro): ");
 		ticketpreis = (int) (tastatur.nextDouble() * 100);
+		if (ticketpreis < 0) {
+			ticketpreis = 1;
+			System.out.println("Fehlerhafte Eingabe - Ticketpreis wird auf 1 gesetzt");
+		}
 		System.out.print("Anzahl der Tickets: ");
 		int ticketanzahl = tastatur.nextInt();
+		if ((ticketanzahl < 0) || (ticketanzahl > 10)) {
+			ticketanzahl = 1;
+			System.out.println("Fehlerhafte Eingabe - Ticketanzahl wird auf 1 gesetzt");
+		}
 		zuZahlenderBetrag = ticketpreis * ticketanzahl;
 
 		// Geldeinwurf
@@ -30,20 +38,19 @@ class Fahrkartenautomat {
 			eingeworfeneMuenze = (int) (tastatur.nextDouble() * 100);
 			eingezahlterGesamtbetrag = eingezahlterGesamtbetrag + eingeworfeneMuenze;
 		}
-		
+
 		// Fahrscheinausgabe
 		System.out.println("\nFahrschein wird ausgegeben");
 		for (int i = 0; i < 8; i++) {
 			System.out.print("=");
 			try {
 				Thread.sleep(200);
-			} 
-			catch (InterruptedException e) {
+			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
 		System.out.println("\n\n");
-		
+
 		// Rückgeldberechnung und -ausgabe
 		rueckgabebetrag = eingezahlterGesamtbetrag - zuZahlenderBetrag;
 		if (rueckgabebetrag > 0) {
