@@ -20,11 +20,13 @@ class Fahrkartenautomat {
 			ticketpreis = 1;
 			System.out.println("Fehlerhafte Eingabe - Ticketpreis wird auf 1 gesetzt");
 		}
+
 		System.out.print("Anzahl der Tickets: ");
 		int ticketanzahl = tastatur.nextInt();
-		if ((ticketanzahl < 0) || (ticketanzahl > 10)) {
-			ticketanzahl = 1;
-			System.out.println("Fehlerhafte Eingabe - Ticketanzahl wird auf 1 gesetzt");
+		while ((ticketanzahl < 1) || (ticketanzahl > 10)) {
+			System.out.println(">> Wählen Sie bitte eine Anzahl von 1 bis 10 Tickets aus.");
+			System.out.print("Anzahl der Tickets: ");
+			ticketanzahl = tastatur.nextInt();
 		}
 		zuZahlenderBetrag = ticketpreis * ticketanzahl;
 
@@ -81,7 +83,7 @@ class Fahrkartenautomat {
 		// Rückgeldberechnung und -ausgabe
 		rueckgabebetrag = eingezahlterGesamtbetrag - zuZahlenderBetrag;
 		if (rueckgabebetrag > 0) {
-			System.out.println("Der Rückgabebetrag in Höhe von " + rueckgabebetrag /100 + " Euro");
+			System.out.println("Der Rückgabebetrag in Höhe von " + rueckgabebetrag / 100 + " Euro");
 			System.out.println("wird in folgenden Münzen ausgezahlt:");
 
 			while (rueckgabebetrag >= 200) { // 2-Euro-Münzen
