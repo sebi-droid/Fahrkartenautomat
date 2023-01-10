@@ -13,12 +13,43 @@ class Fahrkartenautomat {
 		int rueckgabebetrag = 0;
 		int nochZuZahlen = 0;
 
-		// Ticket auswahl
-		System.out.print("Ticketpreis (Euro): ");
-		ticketpreis = (int) (tastatur.nextDouble() * 100);
-		if (ticketpreis < 0) {
-			ticketpreis = 1;
-			System.out.println("Fehlerhafte Eingabe - Ticketpreis wird auf 1 gesetzt");
+		// Fahrkarten
+		final int kurzAB = 200;
+		final int einzelAB = 300;
+		final int tagesAB = 880;
+		final int vierAB = 940;
+
+		// Ticket
+
+		int wahl = 0;
+		while (wahl < 1 || wahl > 4) {
+			System.out.printf("Wählen Sie ihre Wunschfahrkarte für Berlin AB aus:\n");
+			System.out.printf("Kurzstrecke AB [%.2f EUR] (1)\n", (double) (kurzAB / 100));
+			System.out.printf("Einzelfahrschein AB [%.2f EUR] (2)\n", (double) (einzelAB / 100));
+			System.out.printf("Tageskarte AB [%.2f EUR] (3)\n", (double) (tagesAB / 100));
+			System.out.printf("4-Fahrten-Karte AB [%.2f EUR] (4)\n\n", (double) (vierAB / 100));
+			System.out.print("Ihre Wahl: ");
+
+			wahl = tastatur.nextInt();
+			if (wahl <1 || wahl > 4) {
+				System.out.println(">>falsche Eingabe<<");
+			}
+		}
+		switch (wahl) {
+		case 1:
+			ticketpreis = kurzAB;
+			break;
+		case 2:
+			ticketpreis = einzelAB;
+			break;
+		case 3:
+			ticketpreis = tagesAB;
+			break;
+		case 4:
+			ticketpreis = vierAB;
+			break;
+		default:
+			break;
 		}
 
 		System.out.print("Anzahl der Tickets: ");
@@ -28,6 +59,7 @@ class Fahrkartenautomat {
 			System.out.print("Anzahl der Tickets: ");
 			ticketanzahl = tastatur.nextInt();
 		}
+
 		zuZahlenderBetrag = ticketpreis * ticketanzahl;
 
 		// Geldeinwurf
@@ -35,7 +67,7 @@ class Fahrkartenautomat {
 		nochZuZahlen = 0;
 		while (eingezahlterGesamtbetrag < zuZahlenderBetrag) {
 			nochZuZahlen = zuZahlenderBetrag - eingezahlterGesamtbetrag;
-			System.out.println("Noch zu zahlen: " + nochZuZahlen / 100);
+			System.out.printf("Noch zu zahlen: %.2f€\n", (double)  (nochZuZahlen / 100));
 			System.out.print("Eingabe (mind. 5 Cent, höchstens 2 Euro): ");
 			eingeworfeneMuenze = (int) (tastatur.nextDouble() * 100);
 
