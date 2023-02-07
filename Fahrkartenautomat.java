@@ -29,17 +29,7 @@ class Fahrkartenautomat {
 		// Geldeinwurf
 		eingezahlterGesamtbetrag = fahrkartenBezahlen(tastatur, zuZahlenderBetrag);
 
-		// Fahrscheinausgabe
-		System.out.println("\nFahrschein wird ausgegeben");
-		for (int i = 0; i < 8; i++) {
-			System.out.print("=");
-			try {
-				Thread.sleep(200);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-		System.out.println("\n\n");
+		fahrkartenAusgeben();
 
 		// Rückgeldberechnung und -ausgabe
 		rueckgabebetrag = eingezahlterGesamtbetrag - zuZahlenderBetrag;
@@ -206,6 +196,21 @@ class Fahrkartenautomat {
 			eingezahlterGesamtbetrag = eingezahlterGesamtbetrag + eingeworfeneMuenze;
 		}
 		return eingezahlterGesamtbetrag;
+
+	}
+
+	private static void fahrkartenAusgeben() {
+		// Fahrscheinausgabe
+		System.out.println("\nFahrschein wird ausgegeben");
+		for (int i = 0; i < 8; i++) {
+			System.out.print("=");
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println("\n\n");
 
 	}
 }
