@@ -177,46 +177,26 @@ class Fahrkartenautomat {
 	 */
 	private static void rueckgeldAusgeben(int zuZahlenderBetrag, int eingezahlterGesamtbetrag) {
 
-		int rueckgabebetrag = 0;
+		int rueckgabebetrag = eingezahlterGesamtbetrag - zuZahlenderBetrag;
 
-		rueckgabebetrag = eingezahlterGesamtbetrag - zuZahlenderBetrag;
-		if (rueckgabebetrag > 0) {
-			System.out.println("Der Rückgabebetrag in Höhe von " + rueckgabebetrag / 100 + " Euro");
-			System.out.println("wird in folgenden Münzen ausgezahlt:");
+		System.out.println("Der Rückgabebetrag in Höhe von " + rueckgabebetrag / 100 + " Euro");
+		System.out.println("wird in folgenden Münzen ausgezahlt: ");
 
-			while (rueckgabebetrag >= 200) { // 2-Euro-Münzen
-				System.out.println("2 Euro");
-				rueckgabebetrag = rueckgabebetrag - 200;
-			}
-			while (rueckgabebetrag >= 100) { // 1-Euro-Münzen
-				System.out.println("1 Euro");
-				rueckgabebetrag = rueckgabebetrag - 100;
-			}
-			while (rueckgabebetrag >= 50) { // 50-Cent-Münzen
-				System.out.println("50 Cent");
-				rueckgabebetrag = rueckgabebetrag - 50;
-			}
-			while (rueckgabebetrag >= 20) { // 20-Cent-Münzen
-				System.out.println("20 Cent");
-				rueckgabebetrag = rueckgabebetrag - 20;
-			}
-			while (rueckgabebetrag >= 10) { // 10-Cent-Münzen
-				System.out.println("10 Cent");
-				rueckgabebetrag = rueckgabebetrag - 10;
-			}
-			while (rueckgabebetrag >= 5) { // 5-Cent-Münzen
-				System.out.println("5 Cent");
-				rueckgabebetrag = rueckgabebetrag - 5;
-			}
-			while (rueckgabebetrag >= 2) { // 2-Cent-Münzen
-				System.out.println("2 Cent");
-				rueckgabebetrag = rueckgabebetrag - 2;
-			}
-			while (rueckgabebetrag >= 1) { // 1-Cent-Münzen
-				System.out.println("1 Cent");
-				rueckgabebetrag = rueckgabebetrag - 1;
-			}
+		rueckgabebetrag = muenzRueckgabe(rueckgabebetrag, 200, "2-Euro-Münzen");
+		rueckgabebetrag = muenzRueckgabe(rueckgabebetrag, 100, "1-Euro-Münzen");
+		rueckgabebetrag = muenzRueckgabe(rueckgabebetrag, 50, "50-Cent-Münzen");
+		rueckgabebetrag = muenzRueckgabe(rueckgabebetrag, 10, "10-Cent-Münzen");
+		rueckgabebetrag = muenzRueckgabe(rueckgabebetrag, 5, "5-Cent-Münzen");
+	}
+
+	private static int muenzRueckgabe(int rueckgabebetrag, int muenzWert, String muenze) {
+		while (rueckgabebetrag >= muenzWert) {
+
+			System.out.println(muenze);
+
+			rueckgabebetrag -= muenzWert;
 		}
+		return rueckgabebetrag;
 
 	}
 
