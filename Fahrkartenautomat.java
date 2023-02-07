@@ -27,42 +27,7 @@ class Fahrkartenautomat {
 		}
 
 		// Geldeinwurf
-		eingezahlterGesamtbetrag = 0;
-		nochZuZahlen = 0;
-		while (eingezahlterGesamtbetrag < zuZahlenderBetrag) {
-			nochZuZahlen = zuZahlenderBetrag - eingezahlterGesamtbetrag;
-			System.out.printf("Noch zu zahlen: %.2f€\n", (double) (nochZuZahlen / 100));
-			System.out.print("Eingabe (mind. 5 Cent, höchstens 2 Euro): ");
-			eingeworfeneMuenze = (int) (tastatur.nextDouble() * 100);
-
-			// Pfüfung
-			switch (eingeworfeneMuenze) {
-			case 5:
-				break;
-			case 10:
-				break;
-			case 20:
-				break;
-			case 50:
-				break;
-			case 500:
-				break;
-			case 100:
-				break;
-			case 200:
-				break;
-			case 1000:
-				break;
-			case 2000:
-				break;
-			default:
-				System.out.println(">>> Keine gültiges Zahlungsmittel");
-				eingeworfeneMuenze = 0;
-				break;
-			}
-
-			eingezahlterGesamtbetrag = eingezahlterGesamtbetrag + eingeworfeneMuenze;
-		}
+		eingezahlterGesamtbetrag = fahrkartenBezahlen(tastatur, zuZahlenderBetrag);
 
 		// Fahrscheinausgabe
 		System.out.println("\nFahrschein wird ausgegeben");
@@ -197,5 +162,50 @@ class Fahrkartenautomat {
 
 		}
 		return zuZahlenderBetrag;
+	}
+
+	/*
+	 * Geldeinwurf
+	 */
+	private static int fahrkartenBezahlen(Scanner tastatur, int zuZahlenderBetrag) {
+		int eingezahlterGesamtbetrag = 0;
+		int nochZuZahlen = 0;
+		int eingeworfeneMuenze = 0;
+		while (eingezahlterGesamtbetrag < zuZahlenderBetrag) {
+			nochZuZahlen = zuZahlenderBetrag - eingezahlterGesamtbetrag;
+			System.out.printf("Noch zu zahlen: %.2f€\n", (double) (nochZuZahlen / 100));
+			System.out.print("Eingabe (mind. 5 Cent, höchstens 2 Euro): ");
+			eingeworfeneMuenze = (int) (tastatur.nextDouble() * 100);
+
+			// Pfüfung
+			switch (eingeworfeneMuenze) {
+			case 5:
+				break;
+			case 10:
+				break;
+			case 20:
+				break;
+			case 50:
+				break;
+			case 500:
+				break;
+			case 100:
+				break;
+			case 200:
+				break;
+			case 1000:
+				break;
+			case 2000:
+				break;
+			default:
+				System.out.println(">>> Keine gültiges Zahlungsmittel");
+				eingeworfeneMuenze = 0;
+				break;
+			}
+
+			eingezahlterGesamtbetrag = eingezahlterGesamtbetrag + eingeworfeneMuenze;
+		}
+		return eingezahlterGesamtbetrag;
+
 	}
 }
