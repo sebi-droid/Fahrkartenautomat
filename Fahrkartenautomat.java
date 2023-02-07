@@ -18,6 +18,8 @@ class Fahrkartenautomat {
 		final int einzelAB = 300;
 		final int tagesAB = 880;
 		final int vierAB = 940;
+		
+		begruessung();
 
 		// Ticket
 		System.out.printf("Fahrkartenbestellvorgang:\n=========================\n");
@@ -79,8 +81,8 @@ class Fahrkartenautomat {
 			System.out.printf("\n\nZwischensumme: %.2f €\n\n", (double) (zuZahlenderBetrag / 100));
 
 		}
-		
-		if (!(zuZahlenderBetrag >0)) {
+
+		if (!(zuZahlenderBetrag > 0)) {
 			System.out.println("Nichts zu zahlen!");
 			tastatur.close();
 			return;
@@ -180,5 +182,9 @@ class Fahrkartenautomat {
 				+ "Wir wünschen Ihnen eine gute Fahrt.");
 
 		tastatur.close();
+	}
+	
+	private static void begruessung() {
+		System.out.printf("Herzlich Willkommen!\n\n");
 	}
 }
