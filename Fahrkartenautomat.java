@@ -44,71 +44,32 @@ class Fahrkartenautomat {
 	 */
 	public static int fahrkartenbestellungErfassen(Scanner tastatur) {
 		int zuZahlenderBetrag = 0;
-		int ticketpreis = 100;
 
 		// Fahrkarten
-		final int kurzAB = 200;
-		final int einzelAB = 300;
-		final int tagesAB = 880;
-		final int vierAB = 940;
+		String[] fahrkarten = { "Einzelfahrschein AB", "Einzelfahrschein BC", "Einzelfahrschein ABC", "Kurzstrecke AB",
+				"Tageskarte AB", "Tageskarte BC", "Tageskarte ABC", "4-Fahrten-Karte AB", "4-Fahrten-Karte BC",
+				"4-Fahrten-Karte ABC", "Kleingruppen-Tageskarte AB", "Kleingruppen-Tageskarte BC",
+				"Kleingruppen-Tageskarte ABC" };
+		int[] preise = { 300, 350, 380, 200, 860, 920, 1000, 940, 1260, 1380, 2550, 2600, 2650 };
 
-		System.out.printf("Fahrkartenbestellvorgang:\n=========================\n");
-		boolean weitereBestellung = true;
-		while (weitereBestellung) {
-
-			int wahl = 0;
-			while (wahl < 1 || wahl > 4) {
-				System.out.printf("Wählen Sie ihre Wunschfahrkarte für Berlin AB aus:\n");
-				System.out.printf("Kurzstrecke AB [%.2f EUR] (1)\n", (double) (kurzAB / 100));
-				System.out.printf("Einzelfahrschein AB [%.2f EUR] (2)\n", (double) (einzelAB / 100));
-				System.out.printf("Tageskarte AB [%.2f EUR] (3)\n", (double) (tagesAB / 100));
-				System.out.printf("4-Fahrten-Karte AB [%.2f EUR] (4)\n\n", (double) (vierAB / 100));
-				System.out.print("Ihre Wahl: ");
-
-				wahl = tastatur.nextInt();
-
-				if (wahl == 9) {
-					weitereBestellung = false;
-					break;
-				}
-
-				if (wahl < 1 || wahl > 4) {
-					System.out.println(">>falsche Eingabe<<");
-				}
-
-			}
-			if (wahl == 9) {
-				break;
-			}
-
-			switch (wahl) {
-			case 1:
-				ticketpreis = kurzAB;
-				break;
-			case 2:
-				ticketpreis = einzelAB;
-				break;
-			case 3:
-				ticketpreis = tagesAB;
-				break;
-			case 4:
-				ticketpreis = vierAB;
-				break;
-			default:
-				break;
-			}
-
-			System.out.print("Anzahl der Tickets: ");
-			int ticketanzahl = tastatur.nextInt();
-			while ((ticketanzahl < 1) || (ticketanzahl > 10)) {
-				System.out.println(">> Wählen Sie bitte eine Anzahl von 1 bis 10 Tickets aus.");
-				System.out.print("Anzahl der Tickets: ");
-				ticketanzahl = tastatur.nextInt();
-			}
-
-			zuZahlenderBetrag += ticketpreis * ticketanzahl;
-
+		System.out.println("Wählen Sie eine Fahrkarte aus:");
+		for (int i = 0; i < fahrkarten.length; i++) {
+			System.out.printf("%s [%.2f€] (%d)\n", fahrkarten[i], (double) (preise[i] / 100), i);
 		}
+
+		int tmpAuswahl = 0;
+		while (tmpAuswahl < 1 || tmpAuswahl > fahrkarten.length) {
+			System.out.printf("Ihre Auswahl: ");
+			tmpAuswahl = tastatur.nextInt();
+		}
+		int tmpAnzahl = 0;
+		while (tmpAnzahl < 1) {
+			System.out.printf("Anzahl der Tickets: ");
+			tmpAnzahl = tastatur.nextInt();
+		}
+
+		zuZahlenderBetrag = preise[--tmpAuswahl] * tmpAnzahl;
+
 		return zuZahlenderBetrag;
 	}
 
